@@ -1,0 +1,30 @@
+{
+    "manifest_version": 3,
+    "name": "Argonz Youtube Downloader",
+    "version": "1.0",
+    "description": "Download Videos and audios from YouTube",
+    
+    "action": {
+        "default_title": "ArgonzYoutubeDl",
+        "default_popup": "popup.html"
+    },
+    
+    "permissions": [
+        "downloads"
+    ], 
+
+    "host_permissions": [
+        "https://www.youtube.com/*"
+      ],
+
+    "background" : {
+        "service_worker" : "background.js"
+    },
+    
+    "icons": {
+        "16": "images/yticon-128.png",
+        "32": "images/yticon-128.png",
+        "48": "images/yticon-128.png",
+        "128": "images/yticon-128.png"
+    }
+}
