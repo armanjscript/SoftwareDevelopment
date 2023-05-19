@@ -1,0 +1,112 @@
+// //Numbers
+
+// .numbers{
+//     font-weight: 400;
+//     line-height: 1.5;
+//     font-size: 20px; // rem, em, %
+// }
+
+// //Strings
+// .strings{
+//     font-family: 'Helvetica', Arial, sans-serif;
+//     font-weight: bold;
+//     font-style: italic; 
+// }
+
+
+// //Colors
+// .colors{
+//     color: red;
+//     background-color: #ff0000;
+//     border-color: rgb(255, 0, 0);
+//     outline-color: hsl(0, 100%, 50%);
+// }
+
+// //Lists
+// .lists{
+//     margin: 10px 15px 5px 20px;
+//     font-family: 'Raleway', 'Dosis', 'Lato';
+//     border: 1px solid red;
+// }
+
+
+// //Maps
+// $colors:(
+//     primary: red,
+//     secondary: green,
+//     tertiary: blue
+// );
+
+
+// h1{
+//     color: map-get($colors, primary);
+//     background-color: map-get($colors, secondary);
+// }
+
+// //Booleans
+
+
+// //Sass interpolation
+// $b:"border";
+// $c:"color";
+
+// h2{
+//     box-sizing: #{$b}-box; //border-box;
+//     #{$b}: 1px solid blue;
+//     #{$c}: red;
+//     background-#{$c}: green;
+// }
+
+//For loop
+
+// $colors:(
+//     1:red,
+//     2:green,
+//     3:blue,
+//     4:orange
+// );
+
+// @for $i from 1 through 4{
+//     .paragraph-#{$i}{
+//         background-color: map-get($colors, $i);
+//     }
+// }
+
+
+//Each loop
+
+// $colors: red green blue orange;
+
+// @each $color in $colors{
+//     .paragraph-#{$color}{
+//         background-color: $color;
+//     }
+// }
+
+
+//If directive
+// h1{
+//     // @if(2 > 4){
+//     //     color: red;
+//     // }
+
+//     @if(2 < 4){
+//         color: red;
+//     }
+// }
+
+@mixin headingSize($size){
+    @if($size == large){
+        font-size: 45px;
+    }
+    @else if($size == medium){
+        font-size: 30px;
+    }
+    @else{
+        font-size: 15px;
+    }
+}
+
+h1{
+    @include headingSize(medium);
+}
