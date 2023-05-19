@@ -1,0 +1,77 @@
+@import "test";
+
+$color-primary: orange;
+$color-secondary: gray;
+$color-tertiary: royalblue;
+
+$font-lg: 40px;
+$font-md: 30px;
+$font-sm: 20px;
+
+.nav{
+    background-color: $color-primary;
+
+    // nesting
+    ul li{
+        list-style: none;
+    }
+
+    a{
+        text-decoration: none;
+        font-size: $font-sm;
+        color: $color-secondary;
+
+        &:hover{
+            color: $color-tertiary;
+        }
+    }
+}
+
+// @mixin headingStyles($fontSize:50px){
+//     font-size: $fontSize;
+//     color: $color-secondary;
+//     text-align: center;
+// }
+
+// @mixin transition($param...){
+//     transition: $param;
+// }
+
+// .heading{
+//     color:$color-primary;
+//     font-size: $font-lg;
+//     background-color: $color-secondary;
+//     text-align: center;
+// }
+
+%heading{
+        color:$color-primary;
+        font-size: $font-lg;
+        background-color: $color-secondary;
+        text-align: center;
+    }
+
+@function fontSize($size: 25px){
+     @return $size*2;
+}
+
+.banner h1{
+    // @include headingStyles($font-lg);
+    // @extend .heading;
+    @extend %heading;
+
+}
+
+.footer h3{
+    // @extend .heading;
+    @extend %heading;
+}
+
+.banner p{
+    font-size: fontSize($font-sm);
+}
+
+.footer p{
+    font-size: fontSize();
+}
+
