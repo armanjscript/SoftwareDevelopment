@@ -1,4 +1,4 @@
-#linear search (Complexity(n))
+#linear search (Complexity O(n))
 
 def linear_search(input_list, element):
 
