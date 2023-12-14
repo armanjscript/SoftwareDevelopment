@@ -100,7 +100,7 @@ for i in range(6):
 
 print('===========================')
 
-graph = dict() 
+graph = dict()
 graph['A'] = {'B': 5, 'D': 9, 'E': 2} 
 graph['B'] = {'A': 5, 'C': 2}
 graph['C'] = {'B': 2, 'D': 3} 
@@ -135,42 +135,46 @@ def set_previous_node(table, vertex, previous_node):
 def get_distance(graph, first_vertex, second_vertex):
     return graph[first_vertex][second_vertex]
 
-def get_next_node(table, visited_nodes):
-    unvisited_nodes = list(set(table.keys()).difference(set(visited_nodes)))
-    assumed_min = table[unvisited_nodes[0]][DISTANCE]
-    min_vertex = unvisited_nodes[0]
+def get_next_node(table, visited_nodes): 
+        unvisited_nodes = list(set(table.keys()).difference(set(visited_nodes))) 
+        assumed_min = table[unvisited_nodes[0]][DISTANCE] 
+        min_vertex = unvisited_nodes[0] 
+        for node in unvisited_nodes: 
+            if table[node][DISTANCE] < assumed_min: 
+                assumed_min = table[node][DISTANCE] 
+                min_vertex = node 
+        return min_vertex
 
-    for node in unvisited_nodes:
-        if table[node][DISTANCE] < assumed_min:
-            assumed_min = table[node][DISTANCE]
-            min_vertex = node
-
-def find_shortest_path(graph, table, origin):
-    visited_nodes = []
-    current_node = origin
-    starting_node = origin
-    
-    while True:
-        adjacent_nodes = graph[current_node]
-        if set(adjacent_nodes).issubset(set(visited_nodes)):
-            pass
+def find_shortest_path(graph, table, origin): 
+    visited_nodes = [] 
+    current_node = origin 
+    starting_node = origin 
+    while True: 
+        adjacent_nodes = graph[current_node] 
+        if set(adjacent_nodes).issubset(set(visited_nodes)): 
+            # Nothing here to do. All adjacent nodes have been visited. 
+            pass 
         else:
-            unvisited_nodes = set(adjacent_nodes).difference(set(visited_nodes))
-        
-        for vertex in unvisited_nodes:
-            distance_from_starting_node = get_shortest_distance(table, vertex)
-            if distance_from_starting_node == INFINITY and current_node == starting_node:
-                total_distance = get_distance(graph, vertex, current_node)
-            else:
-                total_distance = get_shortest_distance(table, current_node) + get_distance(graph, current_node, vertex)
-            if total_distance < distance_from_starting_node:
-                set_shortest_distance(table, vertex, total_distance)
-                set_previous_node(table, vertex, current_node)
+            unvisited_nodes = set(adjacent_nodes).difference(set(visited_nodes)) 
+            for vertex in unvisited_nodes: 
+                distance_from_starting_node = get_shortest_distance(table, vertex) 
+                if distance_from_starting_node == INFINITY and current_node == starting_node: 
+                    total_distance = get_distance(graph, vertex, 
+                                                  current_node) 
+                else: 
+                    total_distance = get_shortest_distance (table, 
+                    current_node) + get_distance(graph, current_node, 
+                                                 vertex) 
+                if total_distance < distance_from_starting_node: 
+                    set_shortest_distance(table, vertex, 
+                                          total_distance) 
+                    set_previous_node(table, vertex, current_node) 
         visited_nodes.append(current_node)
-        if len(visited_nodes) == len(table.keys()):
-            break
-        current_node = get_next_node(table, visited_nodes)
-    return table
+        #print(visited_nodes)
+        if len(visited_nodes) == len(table.keys()): 
+            break 
+        current_node = get_next_node(table,visited_nodes) 
+    return (table)
 
 
 shortest_distance_table = find_shortest_path(graph, table, 'A') 
