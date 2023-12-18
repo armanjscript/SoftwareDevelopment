@@ -112,8 +112,9 @@ class DoublyLinkedList:
             if node_deleted == False:
                 print('Item not found!')
                 return
-            if node_deleted:
-                self.count -=1
+        if node_deleted:
+            self.count -=1
+            return
 
     
 
@@ -137,9 +138,10 @@ for item in dbl_list.iter():
 for item in dbl_list.reverse():
     print(item)
 
-dbl_list.remove('Rust')
+print("========================")
+dbl_list.remove('Python')
 
-for item in dbl_list.reverse():
+for item in dbl_list.iter():
     print(item)
 
 
