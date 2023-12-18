@@ -84,7 +84,36 @@ class DoublyLinkedList:
             if node == data:
                 return True
         return False
+    
+    def remove(self, data):
 
+        current = self.head
+        node_deleted = False
+
+        if current is None:
+            print('The list is empty')
+            return
+        elif current.data == data:
+            self.head.prev = None
+            node_deleted = True
+            self.head = current.next
+        elif self.tail.data == data:
+            self.tail = self.tail.prev
+            self.tail.next = None
+            node_deleted = True
+        else:
+
+            while current:
+                if current.data == data:
+                    current.prev.next = current.next
+                    current.next.prev = current.prev
+                    node_deleted = True
+                current = current.next
+            if node_deleted == False:
+                print('Item not found!')
+                return
+            if node_deleted:
+                self.count -=1
 
     
 
@@ -104,6 +133,11 @@ dbl_list.append_loc('MySql', 0)
 
 for item in dbl_list.iter():
     print(item)
+
+for item in dbl_list.reverse():
+    print(item)
+
+dbl_list.remove('Rust')
 
 for item in dbl_list.reverse():
     print(item)
