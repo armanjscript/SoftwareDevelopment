@@ -109,8 +109,8 @@ stack = Stack()
 for term in expr:
     if term in "*/+-":
         node = TreeNode(term)
-        node.left = stack.pop()
         node.right = stack.pop()
+        node.left = stack.pop()
     else:
         node = TreeNode(int(term))
     
