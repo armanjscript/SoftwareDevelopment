@@ -1,3 +1,7 @@
+
+from collections import deque
+
+
 class Node:
     def __init__(self, data):
         self.data = data
@@ -36,6 +40,19 @@ def postorder(root_node):
     postorder(current.right)
     print(current.data)
 
+def levelorder(root_node):
+
+    traversing_nodes = deque([root_node])
+    list_of_nodes = []
+    while len(traversing_nodes) > 0:
+        node = traversing_nodes.popleft()
+        list_of_nodes.append(node.data)
+        if node.left:
+            traversing_nodes.append(node.left)
+        if node.right:
+            traversing_nodes.append(node.right)
+    return list_of_nodes
+
 
 n1 = Node('A')
 n2 = Node('B')
@@ -60,3 +77,7 @@ print("=======================")
 
 postorder(n1)
 
+print("=======================")
+
+for item in levelorder(n1):
+    print(item)
