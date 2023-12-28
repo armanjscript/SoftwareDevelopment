@@ -81,3 +81,53 @@ print("=======================")
 
 for item in levelorder(n1):
     print(item)
+
+print("*===================*")
+
+class Stack:
+    
+    def __init__(self):
+        self.elements = []
+
+    def push(self, data):
+        self.elements.append(data)
+    
+    def pop(self):
+        return self.elements.pop()
+
+class TreeNode:
+    def __init__(self, data=None):
+        self.data = data
+        self.left = None
+        self.right = None
+
+#calculation of expr
+
+expr = "4 5 + 5 3 - *".split()
+stack = Stack()
+
+for term in expr:
+    if term in "*/+-":
+        node = TreeNode(term)
+        node.left = stack.pop()
+        node.right = stack.pop()
+    else:
+        node = TreeNode(int(term))
+    
+    stack.push(node)
+
+def calc(node):
+    if node.data == "+":
+        return calc(node.left) + calc(node.right)
+    elif node.data == "-":
+        return calc(node.left) - calc(node.right)
+    elif node.data == "/":
+        return calc(node.left) // calc(node.right)
+    elif node.data == "*":
+        return calc(node.left) * calc(node.right)
+    else:
+        return node.data
+
+root = stack.pop()
+result = calc(root)
+print(f"The result of expression is : {result}")
