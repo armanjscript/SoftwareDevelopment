@@ -76,7 +76,75 @@ class Tree:
         while True:
             if current.data == data:
                 return (parent, current)
+            elif current.data > data:
+                parent = current
+                current = current.left
+            else:
+                parent = current
+                current = current.right
+        return (parent, current)
+    
+    def remove(self, data):
+
+        parent, node = self.get_node_with_parent(data)
+        if parent is None and node is None:
+            return False
+        
+        children_count = 0
+        if node.left and node.right:
+            children_count = 2
+        elif (node.left is None) and (node.right is None):
+            children_count = 0
+        else:
+            children_count = 1
+        
+        if children_count == 0:
+            if parent:
+                if parent.right is node:
+                    parent.right = None
+                else:
+                    parent.left = None
+            else:
+                self.root = None
+        elif children_count == 1:
+            next_node = None
+            if node.left:
+                next_node = node.left
+            else:
+                next_node = node.right
             
+            if parent:
+                 if parent.left is node:
+                    parent.left = next_node
+                 else:
+                    parent.right = next_node
+            else:
+                self.root = next_node
+        else:
+            parent_of_leftmost_node = node
+            leftmost_node = node.right
+            while leftmost_node.left:
+                parent_of_leftmost_node = leftmost_node
+                leftmost_node = leftmost_node.left
+            node.data = leftmost_node.data
+            if parent_of_leftmost_node.left == leftmost_node:
+                parent_of_leftmost_node.left = leftmost_node.right
+            else:
+                parent_of_leftmost_node.right = leftmost_node.right
+    
+    def find_min(self):
+        current = self.root
+        while current.left:
+            current = current.left
+        return current.data
+    
+    def find_max(self):
+        current = self.root
+        while current.right:
+            current = current.right
+        return current.data
+
+
 
 
 
@@ -90,7 +158,12 @@ r=tree.insert(7)
 r=tree.insert(9)
 r=tree.insert(4)
 r=tree.insert(8)
+tree.remove(5)
 
 tree.inorder(r)
 
-print(f"The element found is: {tree.search(6)}")
+print(f"The element found is: {tree.search(5)}")
+
+print(tree.find_min())
+print(tree.find_max())
+
