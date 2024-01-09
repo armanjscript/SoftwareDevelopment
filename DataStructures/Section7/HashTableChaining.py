@@ -1,3 +1,5 @@
+#Seperate chaining technique
+
 class Node:
     def __init__(self, key=None, value=None):
         self.key = key
@@ -18,7 +20,7 @@ class SinglyLinkedList:
             self.tail.next = new_node
             self.tail = new_node
     
-    def traverse(self, key):
+    def traverse(self):
         current = self.head
         while current:
             print("\"", current.key, "--", current.value, "\"")
