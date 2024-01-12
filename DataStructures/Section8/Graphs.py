@@ -31,7 +31,7 @@ for edge in edges_list:
 #print adjacency matrix
 print(adjacency_matrix)
 
-print("--------------->")
+print("--------BFS------------>")
 
 #Breadth First Search
 graph = dict()
@@ -63,3 +63,42 @@ def breadth_first_search(graph, root):
 
 
 print(breadth_first_search(graph, 'A'))
+
+
+print("--------DFS------------>")
+#Depth First Search
+
+graph = dict()
+graph['A'] = ['B', 'S']
+graph['B'] = ['A']
+graph['S'] = ['A','G','C']
+graph['D'] = ['C']
+graph['G'] = ['S','F','H']
+graph['H'] = ['G','E']
+graph['E'] = ['C','H']
+graph['F'] = ['C','G']
+graph['C'] = ['D','S','E','F']
+
+def depth_first_search(graph, root):
+    visited_vertices = list()
+    graph_stack = list()
+    graph_stack.append(root)
+    node = root
+
+    while graph_stack:
+        if node not in visited_vertices:
+            visited_vertices.append(node)
+        adjs_nodes = graph[node]
+        if set(adjs_nodes).issubset(set(visited_vertices)):
+            graph_stack.pop()
+            if len(graph_stack) > 0:
+                node = graph_stack[-1]
+            continue
+        else:
+            remaining_elements = set(adjs_nodes).difference(set(visited_vertices))
+        first_adj_node = sorted(remaining_elements)[0]
+        graph_stack.append(first_adj_node)
+        node = first_adj_node
+    return visited_vertices 
+
+print(depth_first_search(graph, 'A'))
